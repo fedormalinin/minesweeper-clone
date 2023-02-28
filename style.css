@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Appetite";
+  src: url("./src/fonts/appetite.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Appetite";
+  color: #00ced1;
+
+  margin: 0;
+  background-color: #262626;
+}
+
+.sapper-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.board {
+  display: inline-grid;
+  padding: 10px;
+  grid-template-columns: repeat(var(--size), 60px);
+  grid-template-rows: repeat(var(--size), 60px);
+  gap: 4px;
+  background-color: #333333;
+  box-shadow: 0 0 25px black;
+  margin-top: 25px;
+}
+
+.board > * {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  user-select: none;
+}
+
+.board > [data-status="hidden"] {
+  background-color: green;
+  cursor: pointer;
+}
+
+.board > [data-status="mine"] {
+  background-color: red;
+}
+
+.board > [data-status="number"] {
+  background-color: gray;
+  background-size: contain;
+}
+
+.board > [data-status="marked"] {
+  background-color: blue;
+  background-size: contain;
+}
