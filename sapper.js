@@ -8,7 +8,6 @@ export const TILE_STATUSES = {
 export const createBoard = (boardSize, numberOfMines) => {
   const board = [];
   const minePositions = getMinePositions(boardSize, numberOfMines);
-  console.log(minePositions);
 
   for (let x = 0; x < boardSize; x++) {
     const row = [];

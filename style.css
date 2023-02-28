@@ -45,6 +45,32 @@ body {
   margin: 0;
 }
 
+.mine-counter {
+  display: flex;
+  width: 78px;
+  height: 46px;
+  overflow: hidden;
+}
+
+.counter-item {
+  width: 25px;
+  height: 78px;
+  background-image: var(--sprite);
+  background-size: 278px;
+}
+
+.counter-item-01 {
+  background-position: 26px 0;
+}
+
+.counter-item-02 {
+  background-position: 26px 0;
+}
+
+.counter-item-03 {
+  background-position: 0 0;
+}
+
 .status {
   width: 52px;
   height: 52px;
@@ -54,8 +80,8 @@ body {
 }
 
 .timer {
-  width: 70px;
-  height: 52px;
+  width: 78px;
+  height: 46px;
   background-color: red;
 }
 

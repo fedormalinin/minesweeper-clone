@@ -11,7 +11,6 @@ const BOARD_SIZE = 16;
 const NUMBER_OF_MINES = 40;
 
 const board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
-const minesLeftText = document.querySelector("[data-mine-count]");
 const messageText = document.querySelector(".subtext");
 
 const boardElement = document.querySelector(".board");
@@ -31,7 +30,8 @@ board.forEach((row) => {
   });
 });
 boardElement.style.setProperty("--size", BOARD_SIZE);
-minesLeftText.textContent = NUMBER_OF_MINES;
+
+const numPos = [26, 0, 250, 222, 194, 166, 138, 110, 82, 54];
 
 const listMinesLeft = () => {
   const markedTilesCount = board.reduce((count, row) => {
@@ -39,9 +39,21 @@ const listMinesLeft = () => {
       count + row.filter((tile) => tile.status === TILE_STATUSES.MARKED).length
     );
   }, 0);
-  minesLeftText.textContent = NUMBER_OF_MINES - markedTilesCount;
+  const minesArr = String(NUMBER_OF_MINES - markedTilesCount)
+    .padStart(3, "0")
+    .split("");
+  // console.log(`${String(numPos[minesArr[2]])} 0`);
+  document.querySelector(".counter-item-01").style.backgroundPosition = `${
+    numPos[Number(minesArr[0])]
+  }px 0`;
+  document.querySelector(".counter-item-02").style.backgroundPosition = `${
+    numPos[Number(minesArr[1])]
+  }px 0`;
+  document.querySelector(".counter-item-03").style.backgroundPosition = `${
+    numPos[Number(minesArr[2])]
+  }px 0`;
 };
-
+listMinesLeft();
 const checkGameEnd = () => {
   const win = checkWin(board);
   const lose = checkLose(board);
