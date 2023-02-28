@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <script src="script.js" type="module"></script>
-    <title>Sapper</title>
+    <title>Minesweeper</title>
   </head>
   <body>
     <div class="sapper-container">
-      <h1 class="title">Sapper</h1>
-      <div class="subtext">Mines left: <span data-mine-count>10</span></div>
-
+      <div class="control-panel">
+        <div class="mine-counter">
+          <div class="subtext">Mines left: <span data-mine-count>10</span></div>
+        </div>
+        <div class="status"></div>
+        <div class="timer"></div>
+      </div>
       <div class="board"></div>
     </div>
+    <!-- <div class="example"></div> -->
   </body>
 </html>

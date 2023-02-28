@@ -5,31 +5,73 @@
 
 * {
   box-sizing: border-box;
+  --sprite: url("./src/img/minesweeper-sprites_9TPZzv3.png");
 }
 
 body {
   font-family: "Appetite";
-  color: #00ced1;
+  color: #eb3223;
 
   margin: 0;
   background-color: #262626;
 }
 
 .sapper-container {
-  max-width: 1160px;
+  width: 550px;
+  max-height: 640px;
   margin: 0 auto;
   text-align: center;
+  background-color: #bdbdbd;
+  box-shadow: 0 0 25px black;
+  padding: 10px;
+  border-top: solid 4px white;
+  border-left: solid 4px white;
+  border-bottom: solid 4px #7b7b7b;
+  border-right: solid 4px #7b7b7b;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  border-top: solid 4px white;
+  border-left: solid 4px white;
+  border-bottom: solid 4px #7b7b7b;
+  border-right: solid 4px #7b7b7b;
+
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.status {
+  width: 52px;
+  height: 52px;
+  background-image: var(--sprite);
+  background-position: -2px 118px;
+  background-size: 278px;
+}
+
+.timer {
+  width: 70px;
+  height: 52px;
+  background-color: red;
 }
 
 .board {
   display: inline-grid;
-  padding: 10px;
-  grid-template-columns: repeat(var(--size), 60px);
-  grid-template-rows: repeat(var(--size), 60px);
-  gap: 4px;
-  background-color: #333333;
-  box-shadow: 0 0 25px black;
-  margin-top: 25px;
+  grid-template-columns: repeat(var(--size), 32px);
+  grid-template-rows: repeat(var(--size), 32px);
+  overflow: hidden;
+  width: 520px;
+  height: 520px;
+  margin-top: 12px;
+
+  border-top: solid 4px #7b7b7b;
+  border-left: solid 4px #7b7b7b;
+  border-bottom: solid 4px white;
+  border-right: solid 4px white;
 }
 
 .board > * {
@@ -44,20 +86,40 @@ body {
 }
 
 .board > [data-status="hidden"] {
-  background-color: green;
+  background-image: var(--sprite);
+  background-position: 0 66px;
+  background-size: 278px;
   cursor: pointer;
 }
 
 .board > [data-status="mine"] {
-  background-color: red;
+  background-image: var(--sprite);
+  background-position: 108px 66px;
+  background-size: 278px;
 }
 
 .board > [data-status="number"] {
-  background-color: gray;
-  background-size: contain;
+  background-image: var(--sprite);
+  background-position: -34px 66px;
+  background-size: 278px;
+}
+
+.board > [data-status="zero"] {
+  background-image: var(--sprite);
+  background-position: 0 32px;
+  background-size: 278px;
 }
 
 .board > [data-status="marked"] {
-  background-color: blue;
-  background-size: contain;
+  background-image: var(--sprite);
+  background-position: 210px 66px;
+  background-size: 278px;
+}
+
+.example {
+  width: 500px;
+  height: 500px;
+  background-image: var(--sprite);
+  background-position: 0 30px;
+  background-size: 278px;
 }
