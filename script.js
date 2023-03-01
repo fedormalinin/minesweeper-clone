@@ -10,8 +10,7 @@ import {
 const BOARD_SIZE = 16;
 const NUMBER_OF_MINES = 40;
 
-const board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
-
+let board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
 const boardElement = document.querySelector(".board");
 const mainBtn = document.querySelector(".main-button");
 
@@ -20,14 +19,18 @@ const initBoard = () => {
     row.forEach((tile) => {
       boardElement.append(tile.element);
       tile.element.addEventListener("click", () => {
-        revealTile(board, tile);
-        checkGameEnd();
-        startTimer();
+        if (!isGameOver) {
+          revealTile(board, tile);
+          checkGameEnd();
+          startTimer();
+        }
       });
       tile.element.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        markTile(tile);
-        listMinesLeft();
+        if (!isGameOver) {
+          e.preventDefault();
+          markTile(tile);
+          listMinesLeft();
+        }
       });
     });
   });
@@ -58,15 +61,15 @@ const listMinesLeft = () => {
 };
 listMinesLeft();
 
+let timer = 0;
 let isTimerStarted = false;
 let set_interval_id;
 const startTimer = () => {
   if (!isTimerStarted) {
-    let count = 0;
     isTimerStarted = true;
     set_interval_id = setInterval(() => {
-      count += 1;
-      const timerArr = String(count).padStart(3, "0").split("");
+      timer += 1;
+      const timerArr = String(timer).padStart(3, "0").split("");
       document.querySelector(".time-counter-01").style.backgroundPosition = `${
         numPos[timerArr[0]]
       }px 0`;
@@ -80,24 +83,37 @@ const startTimer = () => {
   }
 };
 
+const resetTimer = () => {
+  timer = 0;
+  document.querySelector(
+    ".time-counter-01"
+  ).style.backgroundPosition = `26px 0`;
+  document.querySelector(
+    ".time-counter-02"
+  ).style.backgroundPosition = `26px 0`;
+  document.querySelector(
+    ".time-counter-03"
+  ).style.backgroundPosition = `26px 0`;
+};
+
+let isGameOver = false;
+
 const checkGameEnd = () => {
   const win = checkWin(board);
   const lose = checkLose(board);
 
   if (win || lose) {
-    boardElement.addEventListener("click", stopProp, { capture: true });
-    boardElement.addEventListener("contextmenu", stopProp, { capture: true });
+    isGameOver = true;
+    clearInterval(set_interval_id);
   }
 
   if (win) {
     // messageText.textContent = "You win!";
-    clearInterval(set_interval_id);
+    mainBtn.style.backgroundPosition = "115px 118px";
   }
 
   if (lose) {
     // messageText.textContent = "You lose!";
-    clearInterval(set_interval_id);
-    isTimerStarted = false;
     mainBtn.style.backgroundPosition = "60px 118px";
     board.forEach((row) => {
       row.forEach((tile) => {
@@ -108,15 +124,15 @@ const checkGameEnd = () => {
   }
 };
 
-const stopProp = (e) => {
-  e.stopImmediatePropagation();
-};
-
 const resetGame = () => {
+  isGameOver = false;
+  isTimerStarted = false;
   clearInterval(set_interval_id);
-  listMinesLeft();
+  resetTimer();
+  mainBtn.style.backgroundPosition = "-2px 118px";
   boardElement.innerHTML = "";
-
+  board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
   initBoard();
+  listMinesLeft();
 };
 mainBtn.addEventListener("click", resetGame);
