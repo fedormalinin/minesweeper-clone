@@ -47,6 +47,8 @@ export const markTile = (tile) => {
   }
 };
 
+const numbersPosition = [0, -34, -68, -102, -136, -170, 72, 42];
+
 export const revealTile = (board, tile) => {
   if (tile.status !== TILE_STATUSES.HIDDEN) {
     return;
@@ -64,6 +66,7 @@ export const revealTile = (board, tile) => {
     adjacentTiles.forEach(revealTile.bind(null, board));
   } else {
     tile.element.textContent = mines.length;
+    // tile.element.style.backgroundPosition = numbersPosition[mines.length];
   }
 };
 

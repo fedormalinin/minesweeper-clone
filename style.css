@@ -71,7 +71,7 @@ body {
   background-position: 0 0;
 }
 
-.status {
+.main-button {
   width: 52px;
   height: 52px;
   background-image: var(--sprite);
@@ -79,10 +79,32 @@ body {
   background-size: 278px;
 }
 
+.main-button:active {
+  background-position: -55px 118px;
+}
+
 .timer {
+  display: flex;
+  overflow: hidden;
   width: 78px;
   height: 46px;
-  background-color: red;
+}
+
+.time-counter {
+  width: 25px;
+  height: 78px;
+  background-image: var(--sprite);
+  background-size: 278px;
+}
+
+.time-counter-01 {
+  background-position: 26px 0;
+}
+.time-counter-02 {
+  background-position: 26px 0;
+}
+.time-counter-03 {
+  background-position: 26px 0;
 }
 
 .board {
@@ -118,6 +140,10 @@ body {
   cursor: pointer;
 }
 
+.board > [data-status="hidden"]:active {
+  background-position: -34px 66px;
+}
+
 .board > [data-status="mine"] {
   background-image: var(--sprite);
   background-position: 108px 66px;
@@ -128,6 +154,7 @@ body {
   background-image: var(--sprite);
   background-position: -34px 66px;
   background-size: 278px;
+  color: #eb3223;
 }
 
 .board > [data-status="zero"] {
