@@ -14,6 +14,10 @@ export const GAME_STATUSES = {
   WIN: "win",
 };
 
+export const FIRST_CLICK = {
+  isClickFirst: true,
+};
+
 export const createBoard = (boardSize, numberOfMines) => {
   const board = [];
   const minePositions = getMinePositions(boardSize, numberOfMines);
@@ -63,9 +67,15 @@ export const markTile = (tile) => {
   }
 };
 
-const numbersPosition = [0, -34, -68, -102, -136, -170, 72, 42];
+// const numbersPosition = [0, -34, -68, -102, -136, -170, 72, 42];
 
 export const revealTile = (board, tile) => {
+  if (FIRST_CLICK.isClickFirst && tile.mine) {
+    tile.mine = false;
+    console.log(board);
+  }
+  FIRST_CLICK.isClickFirst = false;
+
   if (tile.status !== TILE_STATUSES.HIDDEN) {
     return;
   }
@@ -143,11 +153,9 @@ const nearbyTiles = (board, { x, y }) => {
 
   return tiles;
 };
-// board.addEventListener("mouseover", () => console.log(1));
 
 const handleMouseOver = (e) => {
   e.target.addEventListener("mousedown", () => {
-    console.log("pressed");
     document.querySelector(".main-button").dataset.status =
       GAME_STATUSES.SCARED;
   });

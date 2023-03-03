@@ -1,6 +1,7 @@
 import {
   TILE_STATUSES,
   GAME_STATUSES,
+  FIRST_CLICK,
   createBoard,
   markTile,
   revealTile,
@@ -65,6 +66,7 @@ listMinesLeft();
 let timer = 0;
 let isTimerStarted = false;
 let set_interval_id;
+
 const startTimer = () => {
   if (!isTimerStarted) {
     isTimerStarted = true;
@@ -135,5 +137,6 @@ const resetGame = () => {
   board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
   initBoard();
   listMinesLeft();
+  FIRST_CLICK.isClickFirst = true;
 };
 mainBtn.addEventListener("click", resetGame);
