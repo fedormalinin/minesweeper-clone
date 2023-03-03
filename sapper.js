@@ -91,8 +91,8 @@ export const revealTile = (board, tile) => {
   if (mines.length === 0) {
     adjacentTiles.forEach(revealTile.bind(null, board));
   } else {
-    tile.element.textContent = mines.length;
-    // tile.element.style.backgroundPosition = numbersPosition[mines.length];
+    // tile.element.textContent = mines.length;
+    tile.element.dataset.num = `0${mines.length}`;
   }
 };
 
