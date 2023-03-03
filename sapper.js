@@ -3,6 +3,15 @@ export const TILE_STATUSES = {
   MINE: "mine",
   NUMBER: "number",
   MARKED: "marked",
+  QUESTION: "question",
+};
+
+export const GAME_STATUSES = {
+  DEFAULT: "default",
+  ONDEFAULT: "default",
+  SCARED: "scared",
+  LOSE: "lose",
+  WIN: "win",
 };
 
 export const createBoard = (boardSize, numberOfMines) => {
@@ -13,7 +22,11 @@ export const createBoard = (boardSize, numberOfMines) => {
     const row = [];
     for (let y = 0; y < boardSize; y++) {
       const element = document.createElement("div");
+      element.classList.add("tile");
       element.dataset.status = TILE_STATUSES.HIDDEN;
+      document.querySelector(".main-button").dataset.status =
+        GAME_STATUSES.DEFAULT;
+      scareFaceListener();
       const tile = {
         element,
         x,
@@ -36,14 +49,17 @@ export const createBoard = (boardSize, numberOfMines) => {
 export const markTile = (tile) => {
   if (
     tile.status !== TILE_STATUSES.HIDDEN &&
-    tile.status !== TILE_STATUSES.MARKED
+    tile.status !== TILE_STATUSES.MARKED &&
+    tile.status !== TILE_STATUSES.QUESTION
   ) {
     return;
   }
-  if (tile.status === TILE_STATUSES.MARKED) {
+  if (tile.status === TILE_STATUSES.HIDDEN) {
+    tile.status = TILE_STATUSES.MARKED;
+  } else if (tile.status === TILE_STATUSES.QUESTION) {
     tile.status = TILE_STATUSES.HIDDEN;
   } else {
-    tile.status = TILE_STATUSES.MARKED;
+    tile.status = TILE_STATUSES.QUESTION;
   }
 };
 
@@ -126,4 +142,24 @@ const nearbyTiles = (board, { x, y }) => {
   }
 
   return tiles;
+};
+// board.addEventListener("mouseover", () => console.log(1));
+
+const handleMouseOver = (e) => {
+  e.target.addEventListener("mousedown", () => {
+    console.log("pressed");
+    document.querySelector(".main-button").dataset.status =
+      GAME_STATUSES.SCARED;
+  });
+  e.target.addEventListener("mouseup", () => {
+    document.querySelector(".main-button").dataset.status =
+      GAME_STATUSES.DEFAULT;
+  });
+};
+
+const scareFaceListener = () => {
+  const tiles = document.querySelectorAll(".board");
+  tiles.forEach((item) => {
+    item.addEventListener("mouseover", handleMouseOver);
+  });
 };

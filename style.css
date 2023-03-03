@@ -74,13 +74,30 @@ body {
 .main-button {
   width: 52px;
   height: 52px;
-  background-image: var(--sprite);
-  background-position: -2px 118px;
-  background-size: 278px;
 }
 
-.main-button:active {
-  background-position: -55px 118px;
+.main-button[data-status="default"] {
+  background-image: var(--sprite);
+  background-size: 278px;
+  background-position: -2px 118px;
+}
+
+.main-button[data-status="win"] {
+  background-image: var(--sprite);
+  background-size: 278px;
+  background-position: -2px 118px;
+}
+
+.main-button[data-status="lose"] {
+  background-image: var(--sprite);
+  background-size: 278px;
+  background-position: 60px 118px;
+}
+
+.main-button[data-status="scared"] {
+  background-image: var(--sprite);
+  background-size: 278px;
+  background-position: -110px 118px;
 }
 
 .timer {
@@ -140,10 +157,6 @@ body {
   cursor: pointer;
 }
 
-.board > [data-status="hidden"]:active {
-  background-position: -34px 66px;
-}
-
 .board > [data-status="mine"] {
   background-image: var(--sprite);
   background-position: 108px 66px;
@@ -166,6 +179,12 @@ body {
 .board > [data-status="marked"] {
   background-image: var(--sprite);
   background-position: 210px 66px;
+  background-size: 278px;
+}
+
+.board > [data-status="question"] {
+  background-image: var(--sprite);
+  background-position: 176px 66px;
   background-size: 278px;
 }
 

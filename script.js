@@ -1,5 +1,6 @@
 import {
   TILE_STATUSES,
+  GAME_STATUSES,
   createBoard,
   markTile,
   revealTile,
@@ -109,12 +110,12 @@ const checkGameEnd = () => {
 
   if (win) {
     // messageText.textContent = "You win!";
-    mainBtn.style.backgroundPosition = "115px 118px";
+    document.querySelector(".main-button").dataset.status = GAME_STATUSES.WIN;
   }
 
   if (lose) {
     // messageText.textContent = "You lose!";
-    mainBtn.style.backgroundPosition = "60px 118px";
+    document.querySelector(".main-button").dataset.status = GAME_STATUSES.LOSE;
     board.forEach((row) => {
       row.forEach((tile) => {
         if (tile.status === TILE_STATUSES.MARKED) markTile(tile);
@@ -129,7 +130,7 @@ const resetGame = () => {
   isTimerStarted = false;
   clearInterval(set_interval_id);
   resetTimer();
-  mainBtn.style.backgroundPosition = "-2px 118px";
+  document.querySelector(".main-button").dataset.status = GAME_STATUSES.DEFAULT;
   boardElement.innerHTML = "";
   board = createBoard(BOARD_SIZE, NUMBER_OF_MINES);
   initBoard();
